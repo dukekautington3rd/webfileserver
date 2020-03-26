@@ -1,0 +1,23 @@
+version: '2.1'
+
+
+services:
+  webserver:
+    image: nginx
+    restart: "no"
+    ports:
+      - 8081:80
+    environment:
+      - TZ="America/Chicago"
+    volumes:
+      - ./malware:/malware
+      - ./nginx.conf:/etc/nginx/nginx.conf
+
+  packer:
+    build:
+     context: .
+    restart: "no"
+    environment:
+      - TZ="America/Chicago"
+    volumes:
+      - ./malware:/malware
